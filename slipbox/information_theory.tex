@@ -1,0 +1,53 @@
+\documentclass{../template/texnote}
+
+\title{Information Theory}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+	\begin{itemize}
+		\item 
+What is (self) information of an event?
+	\begin{itemize}
+\item 
+    In information theory, we define the (self) information (of an event) to be inversely proportional to (the) probability of that event to happen.
+\item 
+    This is based on the argument that if an event is almost certain to happen we gain very little information from the message that it has happened.  
+	\end{itemize}
+\item 
+What is Shannon entropy of a probability distribution?
+	\begin{itemize}
+		\item 
+    “In other words, the Shannon entropy of a distribution is the expected amount of information in an event drawn from that distribution.” ([Goodfellow et al., 2016, p. 71])
+\item 
+    “It gives a lower bound on the number of bits (if the logarithm is base 2, otherwise the units are different) needed on average to encode symbols drawn from a distribution P .” ([Goodfellow et al., 2016, p. 71])
+	\end{itemize}
+\item 
+What is KL divergence?
+	\begin{itemize}
+		\item 
+    “If we have two separate probability distributions P (x) and Q(x) over the same random variable x, we can measure how different these two distributions are using the Kullback-Leibler (KL) divergence.” ([Goodfellow et al., 2016, p. 71])
+    \item
+
+    “it is the extra amount of information (measured in bits if we use the base-2 logarithm, but in machine learning we usually use nats and the natural logarithm) needed to send a message containing symbols drawn from probability distribution P , when we use a code that was designed to minimize the length of messages drawn from probability distribution Q.” ([Goodfellow et al., 2016, p. 72])
+\item 
+    “Because the KL divergence is non-negative and measures the difference between two distributions, it is often conceptualized as measuring some sort of distance between these distributions. It is not a true distance measure because it is not symmetric:” ([Goodfellow et al., 2016, p. 72])  
+	\end{itemize}
+\item
+	What is cross-entropy?\label{cross-entropy}
+	\begin{itemize}
+		\item 
+    If P and Q are two probability densities, then the cross-entropy of P wrt Q is the sum of the Shannon entropy of P and the KL divergence of P wrt Q.
+    	\begin{itemize}
+    		\item 
+			“A quantity that is closely related to the KL divergence is the cross-entropy H(P, Q) = H(P ) + $D_{KL}$(P ‖Q)” ([Goodfellow et al., 2016, p. 73])
+    	\end{itemize}
+\item $$H(P,Q) = H(P) + D_{KL} (P || Q)$$
+        $$ H(P,Q) = -E_{x\sim P} \log Q(x) = -\Sigma_x P(x) \log Q(x)$$
+\item 
+    Since Q is absent from the first term, minimizing the cross-entropy of P wrt Q is equivalent to minimizing the KL divergence.
+	\end{itemize}
+	\end{itemize}
+        %</note>
+    \printbibliography
+\end{document}

@@ -1,0 +1,63 @@
+\documentclass{../template/texnote}
+
+\title{Output size of feature maps in convolutions}
+\label{idea:convolution feature map size}
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+For many, the first introduction to the term ``convolution'' would be from the study of fourier tranforms where it is defined as an integral of the following form.
+\begin{align*}
+y(t) = \int^{\infty}_{-\infty} x(\tau)h(t-\tau)d\tau.
+\end{align*}
+Where \(x(t)\) is a one-dimensional signal and \(h(t)\) is a filter.
+So convolutions can be seen as operations on functions.
+
+The definition from Wikipedia is as follows:
+
+``In mathematics (in particular, functional analysis), convolution is a mathematical operation on two functions 
+\(f\) and \(g\) that produces a third function \( f\ast g\), as the integral of the product of the two functions after one is reflected about the y-axis and shifted.
+''
+
+For computer vision purposes, since we are dealing with images of finite size and discrete values we want the discrete and finite version of this definition.
+Wikipedia gives us the following definition for \textbf{discrete convolution} in one-dimension.
+
+
+For complex-valued functions \(f\) and \(g\) defined on the set \(\mathbb{Z}\) of integers, the discrete convolution of \(f\) and \(g\) is given by:
+\begin{align*}
+	(f \ast g )[n]= \sum_{m=-\infty}^{\infty} f[m]g[n-m]
+\end{align*}
+Note that because of the property of commutativity this is equivalent to,
+\begin{align*}
+	(f \ast g)[n] = \sum_{m=-\infty}^{\infty} f[n-m]g[m]
+\end{align*}
+
+This can be turned into a finite summation provided certain conditions are satisfied.
+\begin{align*}
+	(f \ast g)[n] = \sum_{m=-M}^{M} f[n-m]g[m]
+\end{align*}
+For simplicity, lets consider the integral limits to go from \(0\) to \(M-1\) instead of from \(-M\) to \(M\).
+Let \(f\) be a one-dimensional signal of size I, and \(g\) be the (one-dimensional) kernel or filter of size M.
+Now, %\(n-m\) has to be between 0 and M-1.
+
+\begin{align*}
+	0 \leq n -m  \leq I-1 \\
+	m \leq n \leq I + m -1
+\end{align*}
+Now, substituting m with it's maximum value on the left and the minimum value on the right side we get,
+\begin{align*}
+	M-1 \leq n  \leq I-1 \\
+	M \leq n  \leq I \\
+\end{align*}
+Thus the size of n would be \((I-M+1)\).
+
+The multi-dimensional version of convolution can be computed as follows (from Wikipedia),
+\begin{align*}
+	x(n_1, n_2, ..., n_M) \ast ... \ast h(n_1, n_2, ...n_M) \\
+	= \sum_{k_1} \sum_{k_2} \sum_{k_3} x(n_1 - k_1, n_2 - k_2, ....n_M - k_M) h(k_1, k_2,..k_M)
+\end{align*}
+
+Taking as an example, an image of shape (180,180,3) and a kernel of shape (3,3,3) we get an output of shape (178, 178,1).
+
+    %</note>
+    \printbibliography
+\end{document}

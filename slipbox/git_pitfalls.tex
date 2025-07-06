@@ -1,0 +1,17 @@
+\documentclass{../template/texnote}
+
+\title{Git Pitfalls}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+
+	\begin{itemize}
+		\item The \texttt{git branch --merged} command checks the merged status of existing branches with respect to the current checked out branch.
+		\item In git, there are two types of dates: \texttt{author-date} and \texttt{commit-date}. \texttt{git log} shows the \texttt{author-date} by default wheras GitHub shows the \texttt{commit-date} by default. Since the author-date is part of the patch format, you can get it from appending .patch while viewing a commit on the GitHub website.
+		\item The \texttt{git stash pop} command also applies the stash onto the current checked out branch. If the stash is made from one branch but popped on another, unexpected things might happen.
+		\item \texttt{git cherry-pick} might fail if you have uncommited changes even if the commit you are trying to pick doesn't involve that specific file. Do a clean stash to stash all working directory changes before attempting.
+	\end{itemize}
+    %</note>
+    \printbibliography
+\end{document}

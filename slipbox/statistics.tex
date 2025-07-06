@@ -1,0 +1,152 @@
+\documentclass{../template/texnote}
+
+\title{Statistics}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+
+    %<*note>
+\section{Covariance}
+Refer to Chapter 2.4.2 from \citetitlebyauthor{marslandMachineLearningAlgorithmic2014}.
+
+Variance of a set of numbers is a measure of how spread out the numbers are.
+It is computed as the sum of squared distances between each value and the mean value.
+If we now consider another random variable we can also compute the variance for that.
+However, the covariance is a generalization of this idea to two variables.
+It measures how dependent the two variables are (in the statistical sense).
+\[
+\text{cov}(\{x_i\}, \{y_i\}) = \mathbb{E}(\{x_i\} - \mu) \mathbb{E}(\{y_i\} - \nu)
+\]
+where $\mu$ is the mean of set $\{x_i\}$ and $\nu$ is the mean of set $\{y_i\}$ and E is the expectation operator.
+\section{Evaluation metrics}
+Classification is a common problem that is tackled using machine learning techniques.
+The confusion matrix can be used to quickly get an idea of the classification performance.
+Many of the common metrics used in classification problems can be motivated or derived using the confusion matrix.
+The scikit-learn \info{Citation needed} implementation has predicted labels on the x-axis and true labels on the y-axis.
+If you have it in the other way, the correct predictions would lie along the off-diagonal.
+
+In regard to binary classification, some of the common metrics that can be derived from the CM is as follows.
+\subsection{Precision and Recall}
+\begin{align}
+    \textrm{Precision} &= \frac{\textrm{TP}}{\textrm{TP}+\textrm{FP}} \\
+    \textrm{Recall} &= \frac{\textrm{TP}}{\textrm{FP} + \textrm{TN}}
+\end{align}
+\subsection{TPR and FPR}
+TPR stands for True Positive Rate and FPR stands for False Positive Rate. FPR is also called FAR (False Alarm Rate)
+\begin{align}
+    \textrm{TPR} &= \frac{\textrm{TP}}{\textrm{TP} + \textrm{FN}} \\
+    \intertext{How many true positives out of all the actual positives?}
+	\textrm{FPR} &= \frac{\textrm{FP}}{\textrm{FP} + \textrm{TN}}
+    \intertext{How many false positives out of all the actual \textbf{negative} samples}
+\end{align}
+
+\subsection{Sensitivity and Specificity}
+The TPR and TNR has fancy names unlike FPR and FNR.
+\begin{align}
+    \textrm{TPR} &= \textrm{Sensitivity} = Recall \\
+    \textrm{TNR} &= \textrm{Specificity}
+\end{align}
+For the intuition behind these two terms see the following quote from Wikipedia\info{citation needed}:
+\begin{quote}
+
+If individuals who have the condition are considered ``positive'' and those who do not are considered ``negative'', then sensitivity is a measure of how well a test can identify true positives and specificity is a measure of how well a test can identify true negatives. Sensitivity (true positive rate) is the probability of a positive test result, conditioned on the individual truly being positive. Specificity (true negative rate) is the probability of a negative test result, conditioned on the individual truly being negative.
+\end{quote}
+\subsection{Relation to CM}
+\begin{align}
+    \textrm{Precision} &= \textrm{TP} / \textrm{sum of second row} \\
+    \textrm{Recall or Sensitivity} &= \textrm{TP} / \textrm{sum of second column} \\
+    \textrm{Specificity} &= \textrm{TN} / \textrm{sum of first column}
+\end{align}
+\subsection{Relations between TPR, FPR, TNR, FNR}
+Let's start with the definitions of these terms.
+\begin{align}
+    \textrm{TPR} &= \textrm{TP}/\textrm{P} \\
+    \textrm{FPR} &= \textrm{FP}/\textrm{N} \\
+    \textrm{TNR} &= \textrm{TN}/\textrm{N} \\
+    \textrm{FNR} &= \textrm{FN}/\textrm{P} \\
+    \intertext{Keep in mind that,}
+    P &= \textrm{TP} + \textrm{FN} \\
+    N &= \textrm{TN} + \textrm{FP} \\
+    \intertext{Adding together terms with the same denominator we get,}
+    \textrm{TPR} + \textrm{FNR} &= 1 \\
+    \textrm{FPR} + \textrm{TNR} &= 1
+\end{align}
+\subsection{F1-score}
+In a way, there is a trade-off between precision and recall \info{Make this more clear}.
+When you aim for higher precision you become stricter about the thresholds you set for a sample to be classified as positive and this might lead to losing some of the actual positives.
+Thus either the precision or recall can be made aritificially high at the cost of the other. Hence it doesn't make much sense to use an arithmetic mean to combine both.
+The F1-score is the harmonic mean of precision and recall. For F1-score to be high, both precision and recall must be high \info{Vague}.
+\begin{align}
+    \textrm{F1} &= 2 \times \frac{(\textrm{precision} \times \textrm{recall})}{(\textrm{precision} + \textrm{recall})}
+\end{align}
+\section{Metrics for unbalanced datasets}
+\begin{align}
+    \textrm{Balanced accuracy} &= (\textrm{sensitivity} + \textrm{specificity}) / 2
+\end{align}
+    A more correct measure is the Matthews Correlation Coefficient (MCC) \info{Add equation} \unsure{The choice of a metric depends on the purpose even if the dataset is unbalanced.}
+    Other metrics are F-beta score, Brier score loss, G-mean.
+    \footnote{\url{https://machinelearningmastery.com/tour-of-evaluation-metrics-for-imbalanced-classification/}}
+    \footnote{\url{https://scikit-learn.org/stable/modules/classes.html\#module-sklearn.metrics}}
+
+\subsection{Sorensen–Dice coefficient}
+%The choice of the loss function is critical to the training and performance of a neural network.
+%We have used the dice coefficient loss since it is more suitable to problems with huge class imbalance.
+%Especially in segmentation problems if pixels belonging to the negative class dominates over the positive class the training might get stuck in some local minima where it has learnt the negative class well but not the positive class.
+%A common approach in such cases is to use a modified loss function that penalizes the classes different based on their representation in the training data.
+%However the dice loss as we shall see is robust against such problems.
+%It has shown better performance over other metrics that incorporate the class imbalance %\cite Milletrari 2016
+\info{This portion that I have commented out here can be added to the thesis}
+Sorensen-Dice coefficient is also known by several names including Dice's coefficient or Dice similarity coefficient (DSC). It can be seen as a measure of similarity between two sets.
+Given two sets X and Y, it can be defined in words as, twice the number of elements common to both sets divided by the sum of the number of elements in each set. 
+\begin{align}
+    \textrm{DSC} &= 2 \frac{| X \cap Y|}{|X| + |Y|}
+\end{align}
+%\intertext{Here \(|X|\) and \(|Y|\) are the number of elements in the two sets respectively.}
+Here \(|X|\) and \(|Y|\) are the number of elements in the two sets respectively.
+Now if we try to make an analogy with the predictions of a classifier algorithm.
+Let's say X = the set of elements that are predicted to be positive by a classifier and Y = the set of elements that are actually positive.
+Then we have the following, 
+\begin{align}
+    X \cap Y &= \textrm{TP} \\
+    | X |  &=  \textrm{TP} + \textrm{FP} \\
+    | Y |  &= \textrm{TP} + \textrm{FN}  \\
+    \intertext{Thus we have the formula,}
+    \textrm{DSC} &= 2 \; \frac{\textrm{TP}}{( 2 \textrm{TP} + \textrm{FP} + \textrm{FN})}.
+\end{align}
+This formula is identical to the formula for the traditional F-measure or balanced F-score known popularly as the F1 score.
+Which is the harmonic mean of recall and precision. \info{Include the equation}
+%F1 = 2 / ( 1/recall + 1/ precision)  = 2 ( recall x precision)/(recall + precision) 
+Using this definition we see that since the term TN doesn't appear in the computation, the score isn't affected by an imbalanced dataset where we might have a large number of True Negatives.
+Thus the dice coefficient is a number  between 0 and 1 and which is maximized (equal to 1)  for  a perfect model that has recall and precision of 1.
+
+For the actual implementation of this function as a loss function that can be optimized during the training process two things need to be done. One is to add a non zero value to the denominator to avoid division by zero error. The other is to convert this to a function that can be minimized. To do this we subtract the actual value from one.
+\footnote{\url{https://stats.stackexchange.com/questions/321460/dice-coefficient-loss-function-vs-cross-entropy}}
+\footnote{\url{https://dsp.stackexchange.com/questions/27451/the-difference-between-convolution-and-cross-correlation-from-a-signal-analysis }}
+
+\subsection{Skill scores}
+We quote from Bobra et. al.
+\begin{quote}
+A better way to estimate the performance of a classifier is to determine how it compares to a given benchmark by computing a skill score. Skill scores are usually presented in the format of a score value minus the score of a standard forecast divided by a perfect score minus the score of the standard forecast.
+\end{quote}
+\subsection{True Skill Statistic (TSS)}
+\begin{align}
+    \textrm{TSS}   &= \textrm{TPR} - \textrm{FPR} \\
+\intertext{i.e. it is the same as,} 
+		   &= \textrm{recall} - \textrm{false alarm rate} \\
+		   \intertext{or equivalently, by substituting for FPR in the first equation}
+		   &= \textrm{sensitivity} + \textrm{specificity} - 1  \\
+		   \intertext{(Sensitivity is how good you are at detecting TP and specificity is how good you are at detecting TN. The max values are 1. So if you are perfect you would have 1+1-1 = 1).}
+		   \intertext{also, by substituting for TPR in the first equation} 
+		   &= 1 - \textrm{FPR} - \textrm{FNR} 
+\end{align}
+You can think of this equation as first assigning a score of 1 and then penalizing for any mistakes made (non zero FPR or FNR).
+TSS ranges from -1 to +1. 
+Random or constant forecasts score zero, perfect forecasts score 1, forecasts that are always wrong score -1. (This property is called equitability)
+This is because \( max(\textrm{TPR}) = 1 \), \( max(\textrm{TNR}) = 1 \), \( max(\textrm{FPR}) = 1 \), \( max(\textrm{FNR}) = 1 \). 
+\begin{quote}
+A potential issue with TSS is that it treats FP and FN in the same way, regardless of the differences in consequence.
+\end{quote}
+
+    %</note>
+    \printbibliography
+\end{document}

@@ -1,0 +1,20 @@
+\documentclass{../template/texnote}
+
+\title{Convolutional Neural Networks}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+	\section{Introduction}
+	A convolution can be done between a 2D matrix (image) and a 2D matrix (kernel) to produce another 2D matrix (feature map).
+	Or it can be done between a 3D matrix (an RGB image, say) and a 3D matrix (a set of three 2D kernels, one for each channel) to produce a 2D matrix as output.
+	Note that in both cases, the dimensionality of the output remains two dimensional.
+	The dimensionality of the output in general would depend on the dimensions in which we are free to slide the kernel.
+	In traditional CNN architecture the kernel is slide in just two dimensions (height and width) but in more advanced networks the kernel can also be slide in the third (channel) dimension.
+	This would result in a feature map which has three dimensions.
+	Refer here for a more detailed \exhyperref[idea:convolution feature map size]{OutputFeatMapConvolution}{discussion}.
+
+	The working of a CNN can be seen as the combination of multiple affine transformations.\improve{Add reference to note on Affine transformations.}
+    %</note>
+    \printbibliography
+\end{document}

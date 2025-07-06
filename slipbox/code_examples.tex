@@ -1,0 +1,44 @@
+\documentclass{../template/texnote}
+
+\title{Code Examples}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+\begin{verbatim}
+def expand_df(df):
+    """Expand DataFrame with filepath information using vectorized operations."""
+    pattern = r'(\d+)_(\d+)_(\d{4}\.\d{2}\.\d{2}_\d{2}:\d{2}:\d{2})_TAI_(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)'
+    # Extract all columns at once using str.extract
+    df[['harpnum', 'wavelength', 'obs_start', 'timestamp']] = df['fits_path'].str.extract(pattern)
+    # Convert types efficiently
+    df[['harpnum', 'wavelength']] = df[['harpnum', 'wavelength']].astype(int)
+    return df
+\end{verbatim}
+For some reason, this seems to be much faster than the following when used on a large dataframe.
+Must be a pandas thing.
+
+\begin{verbatim}
+def split_filepath(file_path):
+    """ 
+    Function that reads the name of individual file as a string and extracts AARP id, wavelength, observation
+    start time and the timestamp encoded in the string.
+    """
+    pattern = r'(\d+)_(\d+)_(\d{4}\.\d{2}\.\d{2}_\d{2}:\d{2}:\d{2})_TAI_(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)'
+    match = re.search(pattern, file_path)
+    if match:
+        result = match.groups()
+        return(result)
+    else:
+        print("No match found.")
+        return None
+
+def expand_df(df):
+    df[['harpnum','wavelength', 'obs_start', 'timestamp']] = df['fits_path'].apply(split_filepath).apply(pd.Series)
+    df['harpnum'] = df['harpnum'].astype(int)
+    df['wavelength'] = df['wavelength'].astype(int)
+    return df
+\end{verbatim}
+    %</note>
+    \printbibliography
+\end{document}

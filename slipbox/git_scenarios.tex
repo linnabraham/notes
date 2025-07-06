@@ -1,0 +1,44 @@
+\documentclass{../template/texnote}
+
+\title{Git Scenarios}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+
+	\begin{itemize}
+            \item You have two commits in feature branch that are not there in master and two commits in master that are not there in feature. Hence it is not possible to do fast-forward merge.
+                    \begin{itemize}
+                        \item     \begin{verbatim}
+# Switch to feature branch
+git checkout feature-branch
+
+# Rebase the feature branch onto master
+git rebase master
+
+# Switch to master
+git checkout master
+
+# Fast-forward master to the feature branch
+git merge feature-branch --ff-only
+                            \end{verbatim} 
+                    \end{itemize}
+		\item You are in feature branch but made changes to files which are common to both feature and master.
+				\begin{itemize}
+					\item Commit these changes in master. Then incorporate these changes back into your feature branch by rebasing.
+				\end{itemize}
+		\item Let's say you forgot to do this and accidently commited the changes in feature branch itself.
+				\begin{itemize}
+					\item Go to master, \textbf{cherry-pick} that particular commit from feature into master.
+					\item Go to feature, rebase with the master branch. Now this particular commit instead of being on the top of your feature branch will go down and other changes that are specific to feature will sit on top.
+				\end{itemize}
+	\item You branched off into a feature branch from main. Then made commits in both feature and also in main. You want to integrate the changes made in main but not on top of commits in feature but rather you want to add the commits to the bottom of the feature branch.
+		\begin{itemize}
+			\item  \texttt{git checkout feature}
+			\item \texttt{git rebase main}
+			\item This will rebase your feature branch on top of the main branch. It will remove all commits from feature where it branched off from main. Then first apply the new changes in main and then apply the changes in feature on top of that.
+		\end{itemize}
+	\end{itemize}
+    %</note>
+    \printbibliography
+\end{document}

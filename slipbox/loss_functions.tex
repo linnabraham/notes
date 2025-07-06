@@ -1,0 +1,31 @@
+\documentclass{../template/texnote}
+
+\title{Loss Functions}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+\section{Loss functions}
+How low should my loss function get before I can say that the model has learnt well?
+If I quote from Jason's article in MachineLearningMastery  \footnote{\url{https://machinelearningmastery.com/cross-entropy-for-machine-learning/}}
+\begin{quote}
+If you are working in nats (and you usually are) and you are getting mean cross-entropy less than 0.2, you are off to a good start, and less than 0.1 or 0.05 is even better.
+\end{quote}
+
+\section{Cross-Entropy Loss}
+%\citetitle[see][]{CrossEntropyLossPyTorch26a}
+\exhyperref[cross-entropy]{InformationTheory}{Cross-Entropy} is a commonly used loss function in machine learning classification problems.
+%Also look here in \excref{InformationTheory}.
+In PyTorch there are three versions of cross-entropy loss - \texttt{CrossEntropyLoss}, \texttt{BCELoss}, and \texttt{BCEWithLogitsLoss}.
+\subsection{CrossEntropyLoss}
+In \texttt{torch.nn.CrossEntropyLoss()(inputs, targets)} the target that is passed can 
+either be class indices or probabilities.
+If the former, then the function is equivalent to applying \href{https://docs.pytorch.org/docs/stable/generated/torch.nn.LogSoftmax.html\#torch.nn.LogSoftmax}{LogSoftmax} followed by \href{https://docs.pytorch.org/docs/stable/generated/torch.nn.NLLLoss.html\#torch.nn.NLLLoss}{NLLLoss} - the negative log likelihood loss.
+\subsection{BCEWithLogitsLoss}
+``This loss combines a Sigmoid layer and the BCELoss in one single class. This version is more numerically stable than using a plain Sigmoid followed by a BCELoss'' - see \href{https://docs.pytorch.org/docs/stable/generated/
+torch.nn.BCEWithLogitsLoss.html\#torch.nn.BCEWithLogitsLoss}{here}.
+\subsection{BCELoss}
+This expects input and targets to both be probabilities?
+    %</note>
+    \printbibliography
+\end{document}

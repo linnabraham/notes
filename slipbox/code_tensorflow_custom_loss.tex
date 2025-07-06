@@ -1,0 +1,24 @@
+\documentclass{../template/texnote}
+
+\title{Code Tensorflow Custom Loss}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+\section{Serializing models with custom loss functions}
+\begin{verbatim}
+from tensorflow.keras.utils import get_custom_objects
+
+def custom_dice_loss(y_true, y_pred):
+    # Your custom dice loss implementation
+    pass
+
+# Add the custom loss to the scope
+get_custom_objects().update({'custom_dice_loss': custom_dice_loss})
+
+# Load the model with the custom loss function
+model = load_model('path_to_your_model.h5', custom_objects={'custom_dice_loss': custom_dice_loss})
+\end{verbatim}
+    %</note>
+    \printbibliography
+\end{document}

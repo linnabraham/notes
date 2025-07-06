@@ -1,0 +1,36 @@
+\documentclass{../template/texnote}
+
+\title{Linux Cli}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+Lecture 5: Command-line environment 2020 (\url{https://youtu.be/e8BO_dYxk5c})
+\section{Job control}
+	\begin{itemize}
+		\item \& - program starts but doesn’t take over the prompt
+		\item \texttt{jobs} - see running jobs
+		\item \texttt{bg}   - to continue a suspended job where 1 is the job id.  
+		\item \texttt{kill -STOP}  - suspend a job using job id
+
+		\item \texttt{kill -HUP} - to hang up a job. 
+		\item If you start a  job with \texttt{nohup} like \texttt{nohup sleep 2000} then even if a HUP signal is passed nothing happens.
+		\item \texttt{kill -KILL} - kills a job no matter what
+		\item \texttt{fg} to re-attach a background job to foreground
+
+	\end{itemize}
+
+
+\section{Tmux}
+	\begin{itemize}
+		\item Hierarchy
+		\item Sessions have windows
+		\item windows have panes
+		\item Windows - Tabs in other places
+		\item  `Prefix + 1' jumps to the window 1 in a session
+		\item  `,' (comma) can be used to rename window
+		\item `z' - zoom into a pane, repeat to undo
+	\end{itemize}
+    %</note>
+    \printbibliography
+\end{document}
