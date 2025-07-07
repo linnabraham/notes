@@ -1,0 +1,20 @@
+\documentclass{../template/texnote}
+
+\title{Understanding Overfitting}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+	\section{Overfitting}
+\begin{itemize}
+	\item What is overfitting in terms of training and validation loss?
+\par
+For deciding if the model is overfitting or not you need to compare
+both training and validation loss curves. If instead of moving hand in hand,
+the curves are diverging significantly, the model has started to overfit.
+If the validation loss is coming down every epoch, the model has not yet overfit.
+\end{itemize}
+
+    %</note>
+    \printbibliography
+\end{document}
