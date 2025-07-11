@@ -5,7 +5,33 @@
 \begin{document}
     \maketitle \currentdoc{note}
     %<*note>
-        %Write Note here
+\begin{itemize}
+	\item \textbf{Converting model outputs to probabilities}
+
+		If the model architecture doesn't include a sigmoid in the last layer, which is something that you would do when using the Cross-Entropy Loss in PyTorch, then I guess we need to apply a softmax on the outputs to convert it to probabilities.
+	\unsure{	
+			If the output has just one neuron, would a sigmoid instead of softmax work?
+		}
+	\item \textbf{What is the difference between Sigmoid and Softmax}
+
+The logistic sigmoid function is defined by 
+\[ \frac{1}{1+e^{-x}}\]
+
+\(e^x \to \infty \) as \(x \to +\infty\) and \(e^x \to 0 \) as \(x \to -\infty\).
+Thus the value of the sigmoid function always remains between 0 and 1.
+
+The softmax function is defined as,
+\[ \mathrm{softmax(x_i)} = \frac{e^{x_i}}{\Sigma_{j=1}^{n} e^{x_j}} \]
+
+The softmax function achieves two things, it converts the outputs of a neural network to (0,1) range similar to sigmoid and at the same time leads to the outputs all summing to 1.
+It is a vector function or one that has more than one input.
+
+To understand the function, lets consider three output neurons of which two are zeros, then there arises three cases.
+The third neuron can also be zero, in which case the output of each neuron would be \( \frac{1}{3}\).
+The third neuron can take a very high positive value, in which case the softmax value tends to 1.
+The third neuron can take a very high negative value, in which case the softmax value tends to 0 and the two other terms in the denominator would take over and cause the softmax value to become 0.
+
+\end{itemize}
     %</note>
     \printbibliography
 \end{document}
