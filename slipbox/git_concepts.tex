@@ -1,0 +1,74 @@
+\documentclass{../template/texnote}
+
+\title{Git Concepts}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+	%Basic Usage
+
+\begin{itemize}
+	\item \textbf{diff}
+
+		See changes between two text files tracked by git.
+\item \textbf{staging}
+
+The changes that you to immediately make to your git tracked files are always in the unstaged state. To stage them, you need to use the git add command.
+
+\item \textbf{commit}
+
+You associate a group of changes, possibly to multiple files, to a hash value. You also associate this hash with a commit message for it to make sense to you why you made these changes.
+
+\item \textbf{merge}
+
+Integrate changes made in remote to local on same branch or from one branch to another.
+
+There are different merge strategies like fast-forward, recursive etc. For non-divergent branches, the default is fast-forward. This is the case when your local branch has no commits that are not there in the remote branch. For divergent branches, the default strategy is recursive. The git pull command is basically doing a git fetch and a git merge combined. If you do not want to do a recursive merge, you can use git merge --ff-only or git pull --ff-only.
+
+\item \textbf{rebase}
+
+Say that you have cloned a git repo to two different machines. You work on one and push changes back to the remote (say, github). When you do the same from the other machine you might run into a merge conflict. To solve this, you would have to pull with --rebase.
+
+\item \textbf{restore}
+
+This is a dangerous command that you need to handle with caution. This is often used to replace your unstaged changes with a commited version etc.
+
+\item \textbf{stash}
+
+Use this to stash away uncommitted changes. Often needed when using git pull --rebase. Stash also has an option to save untracked files.
+
+
+%\end{itemize}
+
+%Optional or Advanced Usage
+
+%\begin{itemize}
+	\item {\textbf{patch}}
+
+\verb|git add --patch|
+
+You can use the git add command with the -p option to stage specific hunks from the diff instead of staging all the changes made in a file. If git is not able to split the hunk the way you want there is the “e” option you can give to manually create a hunk.
+
+\verb|git restore --patch|
+
+Restore also supports a patch mode with the -p flag.
+
+\item \textbf{amend and squash}
+
+Both of these are basically rebase operations. One difference between them is that amend only changes the last commit whereas squash is used to combine multiple commits into single commit. Both are useful for keeping a clean commit history (Read more in the official git docs). Once you are familiar with the concepts you can start using --fixup commits and --autosquash flags in rebase -i to speed up things.
+
+\item \textbf{tag}
+
+Useful when you want to tag your commits with a version number or name or something. Commit messages are often meant to describe the changes that were made. But when you want to associate a commit with a working version, tags are helpful.
+
+\item \textbf{submodule}
+
+This is useful when you want to nest a git repo inside another.
+
+\item \textbf{Github Actions}
+
+Allows you to have workflows attached to your git push commands.
+\end{itemize}
+    %</note>
+    \printbibliography
+\end{document}

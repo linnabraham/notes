@@ -1,0 +1,17 @@
+\documentclass{../template/texnote}
+
+\title{Git Cherry Pick}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+	\begin{itemize}
+	\item Integrate only changes introduced by certain commits into another branch.
+
+	\verb|git cherry-pick hash1^..hash3|
+
+		Note the use of the caret sign because the first hash is not included so the caret is used to refer to the parent commit of the one you actually want to get included.
+	\end{itemize}
+    %</note>
+    \printbibliography
+\end{document}

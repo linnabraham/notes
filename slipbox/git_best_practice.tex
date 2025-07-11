@@ -1,0 +1,23 @@
+\documentclass{../template/texnote}
+
+\title{Git Best Practice}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+\begin{itemize}
+\item \textbf{Using the git prompt}
+
+Download the \href{https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh}{git-prompt} script provided by git somwhere in your machine and source it in your shell. After than you can customize your default prompt to show basic git information. Check the comments in the script for usage instruction.
+\item \textbf{Have faithful commits}
+
+If you have a working version of a code. Don’t keep modifications that are uncommitted in your staging area. You can use git stash for this purpose. Once you have a clean repo tag the last commit as the one that has the working version. This is useful if you ever want to revist the state of your repo. If you have unmodified code lying around and some of those code are direct or indirect dependencies in your primary code you never know what was the actual state of your repo when you commited it. The commit are no longer a faithful representation. This is also where you should start thinking of version controlling your data.
+
+\item \textbf{Don't lose your data while learning git}
+
+If you are a beginner who wants to try out certain git commands on your repo but afraid that you might lose data (you should be), then you have two options. Certain commands in git would have an associated dry-run option. Check for that in the docs. If there is no such option then a fail safe alternative is to just create a test branch from your current branch. Test out the things there and once you are satisified, repeat it on the master. Then simply delete the test branch.
+
+\end{itemize}
+    %</note>
+    \printbibliography
+\end{document}

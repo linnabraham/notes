@@ -1,0 +1,20 @@
+\documentclass{../template/texnote}
+
+\title{Git Diff}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+	\begin{itemize}
+		\item \textbf{How to interpret the output of the command?} - \verb|diff foo bar| 
+
+The output shows what changes you need to make to foo in order to make it identical to bar.
+
+\item \textbf{Changes brought by a commit}
+
+
+\verb|git diff <parent-commit>..<current-commit>|
+	\end{itemize}
+    %</note>
+    \printbibliography
+\end{document}
