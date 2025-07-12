@@ -1,0 +1,21 @@
+\documentclass{../template/texnote}
+
+\title{Meeting Minutes Ring}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+        %\section{Meeting minutes}
+	\section{May 19th, 2025}
+		\begin{itemize}
+			\item Discussion with Arif Babul
+			\item Since we have a set of pristine images (simulated) on which various filters (SDSS bandpass or even blurring filters) can be applied, could this be used for training?
+			\item Because simulations allow you to go back in history you can see when a ring appears and might probably disappear too.
+			\item If you can get the same galaxy across redshifts that could also be valuable information to train a network?
+			\item Can we use the sdss and subaru counterparts of simulated galaxies to train or re-train (a model already trained on SDSS) a model which enables us to find rings in Subaru using a trained model with SDSS.
+			\item We could take a set of galaxies and then take the same set at greater redshift, visually label rings and non-rings from the low redshift set and then test the performance on the higher redshift one.
+
+		\end{itemize}
+    %</note>
+    \printbibliography
+\end{document}

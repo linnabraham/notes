@@ -5,7 +5,8 @@
 \begin{document}
     \maketitle \currentdoc{note}
     %<*note>
-\begin{verbatim}
+
+\begin{lstlisting}[language=Python]
 def expand_df(df):
     """Expand DataFrame with filepath information using vectorized operations."""
     pattern = r'(\d+)_(\d+)_(\d{4}\.\d{2}\.\d{2}_\d{2}:\d{2}:\d{2})_TAI_(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)'
@@ -14,10 +15,11 @@ def expand_df(df):
     # Convert types efficiently
     df[['harpnum', 'wavelength']] = df[['harpnum', 'wavelength']].astype(int)
     return df
-\end{verbatim}
+\end{lstlisting}
 For some reason, this seems to be much faster than the following when used on a large dataframe.
 Must be a pandas thing.
 
+\begin{lstlisting}[language=Python]
 \begin{verbatim}
 def split_filepath(file_path):
     """ 
@@ -39,6 +41,26 @@ def expand_df(df):
     df['wavelength'] = df['wavelength'].astype(int)
     return df
 \end{verbatim}
+\end{lstlisting}
+
+
+	\begin{itemize}
+		\item 
+\begin{lstlisting}[language=Python]
+python train_alexnet.py --json-path solar_dataset.json --stats-file /data/linn/stats.pkl
+\end{lstlisting}
+
+\item
+To generate a figure showing the model using tensorflow we need dependencies like \texttt{graphviz} and \texttt{pydot}.
+Since this caused a conflict with our current environment a new conda environment called `graphviz' was created.
+\begin{lstlisting}[language=Python]
+# generate visualization of model
+tf.keras.utils.plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
+\end{lstlisting}
+	\end{itemize}
+
+
+
     %</note>
     \printbibliography
 \end{document}

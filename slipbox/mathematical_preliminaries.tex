@@ -1,0 +1,54 @@
+\documentclass{../template/texnote}
+
+\title{Mathematical Preliminaries}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+    \begin{itemize}
+        \item If $f(x)$ is continous in $a \le x \le b $ and if $f(a)$ and $f(b)$ are of opposite signs, then $f(\epsilon) = 0 $ for at least one number $ \epsilon $ such that $ a \le \epsilon b $.
+        \item (Maclaurin's expansion) \\
+            $ f(x) = f(0) + x f^{\prime}(0) + \frac{x^2}{2!} f^{\prime \prime}(0) + .. + \frac{x^n}{n!}f^{(n)}(0)+ ... $
+        \item (Taylors series) \\
+            $ f(x) = f(a) + \frac{f^{\prime}(a)(x-a)}{1!} + \frac{f^{\prime\prime}(a)(x-a)^2}{2!}+ ...+ \frac{f^{n}(a)(x-a)^n}{n!}$
+        \item (Intermediate value theorem)\\
+            Let $f(x)$ be continous in $[a,b]$ and let k be any number between $f(a)$ and $f(b)$. Then there exists a number $\epsilon$ in $(a,b)$ such that $f(\epsilon) = k$.
+        \item (Mean value theorem)\\
+            If $f(x)$ is continous in $[a,b]$ and $f^{\prime}(x)$ exists in $(a,b)$ then there exists at least one value of x say $\epsilon$ between a and b such that 
+            $$ f^{\prime}(x) = \frac{f(b) - f(a)}{b - a}\;\; a \le \epsilon \le b $$
+    \end{itemize}
+    
+    In mathematical analysis,  \\
+    The intermediate value theorem states that if a continous function f with an interval $[a,b]$ as its domain takes values $f(a)$ and $f(b)$ at each end of the interval then it also takes any value between $f(a)$ and $f(b)$ at some point within the interval.
+
+    This has two important specializations:
+
+    (Bolzano's Theorem)\\
+    If a continous function has values of oppposite sign inside na interval, then it has a root in that interval.
+    Both th e intermeidate value theorem and mean value theorem has real world applications.
+
+    The theorem implies that on any great circle around the world, the temperature , pressure, elevation, $C0_2$ cone or any other similar quantity which varies continously there will always exist tow anitpodal points that share the same value for that variable.
+
+    For implications of M.V.T refer Graduate\_stuff.
+
+    \par
+    Def:
+
+        If f is integrable on $[a,b]$, its average(mean) value on $[a,b]$ is 
+        $$ \frac{1}{b-a} \int_a^b f(x) dx$$
+        
+        Mean Value Theorem (for definite integrals) \\
+        If f is continous on $[a,b]$ then at some point c in $[a,b]$
+        $$ f(a) = \frac{1}{b-a}\int_a^b f(x) dx $$
+
+        First Fundamental Theorem of Calculus
+        If f is continous on [a,b], then 
+        $$ F(x) = \int_a^x f(t) dt $$
+        has a derivative at every point and 
+        $$ \frac{dF}{dx} = \frac{d}{dx} \int_a^xf(t)dt $$
+
+        Fundamental Theorem of Calculus Part 2,
+        $$ \int_a^b f(x) dx = F(b) - F(a) $$
+    %</note>
+    \printbibliography
+\end{document}
