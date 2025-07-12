@@ -1,0 +1,141 @@
+\documentclass{../template/texnote}
+
+\title{Topical Course Lecture 1}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+\section{Main Sequence}
+%\section{Cold gas}
+The typical temperature of the (cold) gas cloud that is found in space is something like 10 K.
+So it emits mostly in the infra-red.
+The total energy of this gas becomes negative.\unsure{Why?}%\info{The potential energy of a bound system would be negative.
+\textcolor{teal}{As this volume of gas contracts due to its own gravity, and at some point the density or temperature in the core become enough to 
+start nuclear reactions.}
+At this point since the matter no longer collapses, the gravitational P.E. no longer decreases. %The radiation is now fuelled by the nuclear reactions in the core.
+The radiative losses are now balanced by nuclear reactions.
+A star stays for a long time, something like 10 million years in this (steady) state which is called the main sequence.
+%Total energy becomes negative.
+%Since star no longer collapses the Grav PE doesnt decrease, the radiation is fuelled now by the nuclear reactions.
+%10 million years - steady state in MS
+%self-gravitating object -? 
+%radative losses are balanced by nuclear reactions
+
+Gravitational potential energy released is partly radiated away,
+and partly goes to heating the collapsing cloud
+Density, Temperature and Pressure of the cloud increase.
+When T exceeds several million Kelvins, nuclear reactions begin\info{What about quantum tunnelling effects?}.
+Nuclear energy release halts the collapse and stabilises the
+cloud
+A star is born, and shines steadily until the nuclear fuel runs
+out
+
+A star is a self-gravitating\unsure{Does this have a proper definition?} object in which nuclear reactions are
+(or have been) sufficient to balance radiative losses
+%HR diagram
+\section{HR Diagram of Nearby Stars}
+
+When you look at the stars in the night sky, the two most easily observed qualities are its brightness and colour.
+Most stars might look white, but a few look red and some look bluish.
+The HR diagram is also called a colour-magnitude diagram.
+We know that the ``magnitude'' is a measure of the brightness of a star.
+So is the HR diagram a plot of colour against brightness?
+The parallax of a star helps us understand which are the nearby stars and which are far away.
+So using this we can convert the apparent magnitudes to absolute magnitues\info{Where absolute magnitude will be based on the brightness of a star at a standard distance}.
+However, note that beyond a point the parallax becomes too small to measure, so for stars which are very far away this technique doesn't work.
+The stars plotted in the given HR diagram uses 
+22000 stars from the Hipparcos Catalogue\info{Find more about this catalogue} and
+1000 stars from the Gliese Catalogue.
+Now instead of measuring this brightness in the whole visible spectrum, lets limit ourselves to two bands in the visible spectrum which are centered on wavelengths in the blue and violet regions.
+Since stars radiate like blackbodies,
+The ratio of these brightness uniquely define the temperature of the blackbody curve.
+Since the magnitude scale is a log scale, the ratio of the brightness corresponds to a difference in the logarithms.
+Hence colour is taken to be B - V where B and V are the magnitudes\unsure{What is colour anyway? How is it related to this definition?}.
+Thus the HR diagram is a plot of the (absolute) magnitude against the difference in the magnitudes as viewed through two filters (colour).
+Since the absolute magnitude is related to the luminosity and the colour is related to the temperature, it can also be seens as a luminosity vs temperature plot.
+This temperature is also called the effective(surface) temperature \unsure{Is this same as ``luminosity temperature''}
+
+\textcolor{teal}{What things do we infer from the shape of the HR diagram?}
+
+From the HR diagram and the theory of stellar structure we can determine a star's radius, mass, age, evolutionary state and chemical composition.
+For e.g., using the assumption of blackbody emission, we can calculate the radius of the star, from its position on the HR diagram.
+\unsure{Why do the plots of constant radius appear like it does in the HR diagram?}
+We can also explain things like the minimum and maximum mass of stars.
+%Brightness & Colour are the most easily observed qualities of a star
+
+%H-R diagram also called Colour-Magnitude diagram
+
+%Hipparcos catalogue
+%Gliese catalogue
+%Brightness and colour are most easily observed qualities of a star.
+%Mag scale defined in such a way that difference in 5 corresponds to luminosity of 100
+%A reasonably bright star might be 1 and barely faint one - 6.
+%Stars radiate like blackbodies. - Assumpt
+
+%HR dig -> Plot of L vs T_eff
+%Book
+%1. Hydrostatic eqb
+%2. Radiative energy transport
+%3. Radiative models
+%4. Opacity
+%5. Nuclear energy gen
+%6. The Main seq
+%7. Convection
+
+
+%Textbooks
+%Carroll and ostlie
+%Physics of stars - philips
+%Lectures on Astrophysics - Weinberg
+%Stellar Structure and Evolution - Weiss Kippenhahan,  Weigert
+
+%Convection is reponsible (mostly?) for the energetic phenomenon in stars and Sun.
+%Suvas - Why are we using only B or V?
+
+
+%Hydrostatic Eqb
+%\chapter{Hydrostatic Equilibrium}
+
+%Steady state
+%Spherically symmetric
+%Gas has no motions - assumption
+%Element - mass density is taken to be a function of radial distance.
+
+%There is push on the element from both sides 
+%Gas below pushes up and gas above pushes down.
+%What must be source of pressure ? - gas pressure and radiation pressure.
+\section{Hydrostatic Equilibrium}
+\section{Virial theorem}
+Refer to\citetitlebyauthor{weinberg_lectures_2020}
+
+Equation (1.1.4) (from \citeauthor{weinberg_lectures_2020}) can be used to derive a simple formula for the total gravitational potential energy $\Omega$ of the star, related to the virial theorem of celestial mechanics. We define $ - \Omega$\unsure{Why explicitly make it negative? - This might be explained in Frank Shu's book.} as the energy required\info{Or the work done} to remove the mass of the star to infinity, peeling it shell by shell from the outside in.
+\info{Work done is the integral of force and displacement}
+Once all the mass exterior to a radius r has been removed, the energy required to remove the shell at r of thickness dr is the integral over the distance $r'$ %\info{We use $r'$ for the variable of integration starting from r to infinity.}
+between the shell and the star’s center\unsure{Shouldn't this be between the shell at r and infinity instead?}, of the gravitational force exerted by a mass $\mathcal{M}(r)$ \unsure{Mass interior to the shell?} on the shell's mass:
+
+%\info[inline]{The force involved is the gravitational attraction between the mass interior to the shell and the mass of the shell.}
+\begin{align}
+    W &=   \intlim{r'=r}{\infty}{\frac{G\mathcal{M}(r)}{r'^2}4\pi r^2\rho(r)dr}{r'} \\
+      &=   G\mathcal{M}(r)4\pi r^2\rho(r)dr \intlim{r'=r}{\infty}{\frac{1}{r'^2}}{r'} \\
+      &=   G\mathcal{M}(r)4\pi r^2\rho(r)dr \x \frac{1}{r}\\
+\end{align}
+
+To find the total gravitational P.E. we need to consider all such shells from $r=R$ to $r=0$\unsure{Does this order affect limit of integral or signs?}
+\begin{align}
+    -\Omega = 4\pi G \intlim{0}{R}{r\mathcal{M}(r)\rho(r)}{r}
+\end{align}
+where R is the radius of the nominal stellar surface, where $p(R) = 0$.
+Substituting for $-G \mathcal{M}\rho$ from equation 1.4 (in \citeauthor{weinberg_lectures_2020}),
+\begin{align}
+    \Omega &= 4\pi \intlim{0}{R}{\dv{p(r)}{r}r^3}{r}
+\end{align}
+After having integrated by parts and using the vanishing of $r^3p(r)$ at both endpoints of the integral.
+\begin{align}
+    \Omega &= -3 \intlim{0}{R}{p(r)4\pi r^2}{r} \\
+           &= -3 \ \overline{P} V
+\end{align}
+Where $\overline{P}$ is the volume averaged pressure in the star.
+
+    %</note>
+    \printbibliography
+\end{document}
