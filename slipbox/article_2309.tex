@@ -1,0 +1,136 @@
+\documentclass{../template/texnote}
+
+\title{\textbf{\capitalisewords{Guide to Practical Machine Learning for Astronomy - Part I}}}%[author={Linn Abraham}]
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+
+This article is meant to be a guide for people from a scientific background who are interested in venturing into the field of machine learning but lacking the technical know-how. This is the first in a series of articles trying to achieve the goal. Before we go in-depth, let us first try to summarize the journey of a machine learning researcher working on solving an astrophysical problem. 
+
+\section{Stages of a Machine Learning Project}
+\begin{enumerate}
+    \item The first stage of the machine learning researcher's journey involves setting up his or her computer. This involves deciding on the hardware requirements, operating system, programming language and frameworks to use. There are also add on modules or libraries that are helpful to install, as well as IDEs and other tools that makes your life easier.
+    \item The second stage is often the most difficult. Here you need to define a scientific problem to solve using ML or DL. A survey of scientific problems that exist in your field of study is a necessary pre-requisite. You also need to have a good grasp of the capabilities and limitations of ML or DL techniques to make a decision here.
+    \item If you have a well-defined problem,  then in the third stage, you need to worry about the data and algorithms. Making visualization of your data helps a lot towards understanding its nature as well as deciding which methods to use. Several parameters like the size and availability of your data, the complexity of the problem and the computational time and expense that are affordable etc. go into deciding the methods to be used. 
+    \item In the next stage, you need to process your data before you pass it your ML/DL model. You also need to design and implement your model. Both these things require writing good code.
+    \item The next stage consists of the model fitting or the training stage. This is followed by the evaluation of your model performance. 
+    \item The final stage is where you use all the feedback to go back and make improvements in your model so as to increase its performance. 
+\end{enumerate}
+
+The rest of the article deals with first stage of the journey which is all about having the proper technical setup. 
+    
+\section{Setting up your computer}
+You need a computer at two different stages of the journey - one while developing your code and one for running the training of your ML algorithms. You need a much more powerful system for running most modern ML/DL algorithms that what is required for developing the code. Thankfully there are free and paid options available to do the former that are much better than owning your own hardware. For the latter, if you have the budget to own a laptop with a dedicated graphics card, make sure you only choose laptops that supports the NVIDIA GPUs. But for developing code you do not need a beefy system. Even a machine which just has an Intel i3 processor or its Ryzen equivalent and a 4GB RAM would suffice. If your laptop comes preinstalled with Windows, try to get it to dual boot a Linux OS. Linux is your best friend when it comes to the world of code development. The term Linux doesn't refer to any particular OS that you can install. However there are various flavours or distributions of Linux which you can actually install on your machine. Ubuntu is one of the most popular Linux distributions. However if you are looking for something more interesting that Ubuntu, Arch based distributions like Endeavour OS are a good option. The Arch User Repository or (AUR) is one of the best features of Arch Linux that makes it easy for beginners to install several packages that are most often missing from official Linux repositories. Once you are comfortable with using Linux and you feel as if you want to get into the inner workings, one of the best ways to start is by installing the \cite{archlinux} OS. You can do this on something like a spare pendrive by following the arch installation guide. 
+
+\section{The programming setup}
+Once the OS is setup, deciding on a programming language to use is the next step. You do not have to make much of a decision here. Python is the language that is most suited for machine learning development. It comes pre-installed on most Linux distributions. One of the main advantages of Python is it simplicity and free and open-source nature. This has gained Python a large number of users that have contributed a lot of code. These are available as modules that are easily installed from a central repository. The most commonly used modules for ML developers are the following: Numpy, Pandas, Matplotlib, Scipy, Scikit-Learn, PIL, OpenCV and Tensorflow. The program that helps you install packages from the \cite{pypi} is called PIP an acronym for Pip Installs Packages. Sometimes if you are required to use a Python version that is not already installed and you do not have sufficient permission to install it, the \cite{miniconda} distribution becomes a useful tool. Conda environments are slightly different from ordinary Python virtual environments because they are capable of installing different versions of Python as well non-python dependencies that are sometimes required for installing Python packages. It does this using a container like environment that keeps the installed dependencies separate from the already installed ones in your system. 
+
+How do you start writing python code? There are two ways in which people write machine learning code. The first way uses scripts - which are basically a text file with a .py extension. Any good old text editor would suffice. However there are other software that can also come in handy. Terminal based editors like VIM, Nano, Emacs, etc. can come in handy when you have to run code on remote servers where there is no graphical interface. The second way is using Jupyter Notebooks - which are a custom JSON format file with a .ipynb extension. Jupyter Notebooks enable the user to save both the code and the output of each line that can be opened in a web browser. There also exists IDEs other than Jupyter Notebook that are worth considering. VSCode and Sublime are two such options. Before you start using Python on your Linux be sure to check out how to create a Python virtual environment. Always make sure that you are installing python packages inside a virtual environment. 
+
+\section{Code version control and Github}
+An important piece of technology that can make your life as a coder much easier in the long run is a version control system. When you write code, you often find the need to undo your work. If you have saved your work already, you might find it difficult to revert back unless you have saved versions of your code at different times. Creating such versions manually can quickly become a hectic thing to manage. Git is the most popular version control system. It allows you to make manual checkpoints (called commits) in your Git repository. A repository in git is just the primary folder in your system that contains all of the data and code related to your machine learning project. Keep in mind that Git is designed to track only text files and not image or binary data. Do not version control your data using Git. There are other options that you can check out if you are interested in version controlling your models or data (eg. \cite{dvc}). When using Git, it is advisable to frequently create git branches in your repository every time you think of making an improvement to your existing code. If the path taken is not to your liking throw away the branch. If after a while you feel like the improvements made are there to stay, merge the branch to your already existing best version (called the master or main branch). 
+
+The popular code sharing platform \cite{github} is a collection of git repositories made public by various people and companies. ML researchers can use Github to share their code for other people to use and review. They can also share their code privately with other developers or mentors while in the developmental stage using private repositories. Github provides a cloning method based on Personal Access Tokens (PAT) that makes it very trivial to clone your private repositories on any system. Code repos in github that make use of Python would mostly have a requirements.txt file that shows which external packages are required to run the code. Create such a file for your own project. It is also a good practice to create a README file that mentions how the scripts in the repo can be run. 
+\section{Where to get help?}
+
+In this section I will list resources you can use to learn about the things that has been already discussed and more things to read. 
+\begin{enumerate}
+\item \cite{scipylectures} - Getting started with Python and learning scientific packages like Numpy, Matplotlib and Scipy.
+\item \cite{exercism} - A website for learning the basics of Python using exercises.
+\item \cite{pyimagesearch}  - Adrian's blog for Computer Vision
+\item  \cite{coursera} \& \cite{udacity} - Machine Learning Courses
+%\item Machine Learning: An Algorithmic Perspective,  \cite{marsland_machine_2014} 
+%\item \href{https://www.tensorflow.org/tutorials/quickstart/beginner}{Tensorflow tutorials}
+\item \cite{googlecolab} - Free resource for developing and/or training ML models. Jupyter notebook running on a virtual machine in the cloud. Note that a single code can run only upto a maximum of 12 hours.
+\item \cite{pypi} - Repository of python packages
+\item \cite{gdown} - Python package for downloading data from google drive using a shareable link
+\item Deep Learning with Python, \cite{chollet_deep_2018} - Introduction to Deep Learning using Python and the Keras framework
+\item \cite{archwiki} - Solution to most troubles you might face on Linux
+\item \cite{lukesmith} - Getting around to using an Arch Linux based OS
+\end{enumerate}
+
+\renewcommand{\bibname}{References}
+
+\begin{thebibliography}{15}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Arch Linux}]{archlinux}
+{Arch Linux}.
+\newblock \url{https://archlinux.org/}.
+
+\bibitem[{Python Packaging Index}]{pypi}
+{Python Packaging Index}.
+\newblock \url{https://pypi.org/}.
+
+\bibitem[Miniconda]{miniconda}
+Miniconda.
+\newblock \url{https://docs.conda.io/en/latest/miniconda.html}.
+
+\bibitem[{Data Version Control}]{dvc}
+{Data Version Control}.
+\newblock \url{https://dvc.org/}.
+
+\bibitem[Github]{github}
+Github.
+\newblock \url{https://github.com/}.
+
+\bibitem[{Scipy Lectures}]{scipylectures}
+{Scipy Lectures}.
+\newblock \url{https://scipy-lectures.org/}.
+
+\bibitem[Exercism]{exercism}
+Exercism.
+\newblock \url{https://exercism.org/}.
+
+\bibitem[PyImageSearch]{pyimagesearch}
+PyImageSearch.
+\newblock \url{https://pyimagesearch.com/}.
+
+\bibitem[Coursera]{coursera}
+Coursera.
+\newblock \url{https://coursera.org/}.
+
+\bibitem[Udacity]{udacity}
+Udacity.
+\newblock \url{https://www.udacity.com/}.
+
+\bibitem[{Google Colaboratory}]{googlecolab}
+{Google Colaboratory}.
+\newblock \url{https://research.google.com/colaboratory/}.
+
+\bibitem[Gdown]{gdown}
+Gdown.
+\newblock \url{https://pypi.org/project/gdown/}.
+
+\bibitem[Chollet(2018)]{chollet_deep_2018}
+Fran{\c c}ois Chollet.
+\newblock \emph{Deep Learning with {{Python}}}.
+\newblock {Manning Publications Co}, {Shelter Island, New York}, 2018.
+\newblock ISBN 978-1-61729-443-3.
+
+\bibitem[{Arch Linux Wiki}]{archwiki}
+{Arch Linux Wiki}.
+\newblock \url{https://wiki.archlinux.org/}.
+
+\bibitem[{Luke Smith Youtube channel}]{lukesmith}
+{Luke Smith Youtube channel}.
+\newblock \url{https://www.youtube.com/@LukeSmithxyz}.
+
+\end{thebibliography}
+
+\vspace{0.5cm}
+\noindent\fbox{%
+	\parbox{\textwidth}{%
+		\textbf{About the Author}\vspace{0.2cm} \\
+		\textbf{Linn Abraham} is a researcher in Physics, specializing in A.I. applications to astronomy. He iscurrently involved in the development of CNN based Computer Vision tools for classiﬁcations of astronomicalsources from PanSTARRS optical images. He has used data from a several large astronomical surveys includingSDSS, CRTS, ZTF and PanSTARRS for his research.
+		
+	}
+}
+    %</note>
+    \printbibliography
+\end{document}

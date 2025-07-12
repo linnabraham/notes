@@ -1,0 +1,59 @@
+\documentclass{../template/texnote}
+
+\title{\textbf{Understanding the XGBoost Algorithm}}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+\section{Introduction}
+
+Decision trees, while powerful, often suffer from high variance and overfitting when used in isolation. Ensemble techniques like bagging and boosting address these limitations by combining multiple weak models to create a stronger one. AdaBoost was one of the earliest successful boosting algorithms, improving weak learners by iteratively focusing on misclassified instances. However, as datasets grew larger and models became more sophisticated, the need for a faster, more scalable, and regularized boosting method led to the development of XGBoost.
+XGBoost which stands for (Extreme Gradient Boosting) is widely regarded as one of the most powerful machine learning algorithms available today.
+It builds upon AdaBoost and traditional gradient boosting with optimizations that improve accuracy, efficiency, and generalization.
+
+\section{Decision Trees}
+
+Decision Trees (DTs) are a supervised learning method used for classification and regression.
+A decision tree is the embodiment of the structured way in which people mostly takes decision in life.
+For example if one was to decide whether to go out or stay indoors based on the weather conditions, one might ask a series of yes or no questions.
+Starting from - ``Is it raining?''. If the answer is yes, you come to a decision of not going outside.
+But if the answer is no, then you ask further questions like, ``Is the temperature outside greater than 35 degree celsius?''
+This can also be considered to be a set of if-then-else rules.
+Now, imagine the machine using such a scheme to arrive at a decision on a classification or regression problem.
+The decision tree has a root (or a root node), branches (or internal nodes) and leaves (or leaf nodes).
+The branches can be the questions that are being asked and based on which further branches or splits occur. All the splitting terminates at a leaf node which is a class (in a classification problem).
+The root node is just the first question being asked.
+Note that there can be multiple leaf nodes with the same class or label.
+Constructing such a decision tree can also be compared to the classic game of ``20 questions'' where one person tries to guess what another person has in mind (a place, thing, person etc.) based on a set of 20 questions.
+The success of the game depends on asking the most informative questions in the beginning rather than at the end.
+
+\section{Boosting: An ensemble learning technique}
+
+The idea of ensemble learning is that improved performance can be obtained by combining multiple models together instead of just using a single model in isolation.
+Such combination of models are also called committees.
+Boosting is a variant of such commitee methods where multiple models are trained in a sequence.
+Also, the error function used to train a particular model depends on the performance of the previous models.
+For example, more weight is given to the misclassified examples.
+
+\section{AdaBoost}
+AdaBoost which stands for Adaptive Boosting, is one of the earliest and most infliential boosting algorithms.
+The major innovation brought out by the method is to give weights to each datapoint according to how difficult previous classifiers have found it.
+Thus we see that AdaBoost is not a standalone algorithm but needs a classifier which can consider this weight input when training.
+The weights are initially all set to the same value, $1/N$ , where N is the number of datapoints in the training set.
+Then, at each iteration, the error $\epsilon$ is computed as the sum of the weights of the misclassified points, and the weights for incorrect examples are updated by being multiplied by $\alpha$. The whole set of weights are then normalized to sum to 1, which effectively means that the weights for the correct examples are reduced.
+This factor is taken to be - \[ \alpha = \frac{1-\epsilon}{\epsilon}\]
+The training terminates after a fixed number of iterations, or when all datapoints are classified correctly or one of the datapoint contains more than half of the available weight.
+Not all machine learning algorithms can be modified to make use of such a weight but one which can be modified is the decision tree algorithm.
+
+\section{XGBoost}
+XGBoost builds upon AdaBoost by shifting from adaptive boosting to gradient boosting, optimizing weak learners using gradient descent rather than adjusting instance weights. This allows XGBoost to minimize loss more effectively by leveraging both first and second-order derivatives, making it more robust to noisy data. Additionally, while AdaBoost primarily relies on shallow decision stumps, XGBoost constructs trees in a depth-wise manner with pruning, leading to better feature interactions and model efficiency.
+
+Beyond its core boosting improvements, XGBoost introduces L1 and L2 regularization, reducing overfitting—an issue AdaBoost often struggles with. It also handles missing data natively and significantly improves training speed through parallelized histogram-based computation. These enhancements make XGBoost not just a more scalable alternative but also a more versatile and powerful gradient boosting implementation widely used in modern machine learning.
+
+%\nocite{bishopPatternRecognitionMachine2006}
+%\nocite{marslandMachineLearningAlgorithmic2014}
+%\nocite{chenXGBoostScalableTree2016}
+%\bibliography{zotero}
+    %</note>
+    \printbibliography
+\end{document}

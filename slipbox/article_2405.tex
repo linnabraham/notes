@@ -1,0 +1,72 @@
+\documentclass{../template/texnote}
+
+\title{\textbf{Beginners Guide to Machine Learning in Python - Part 2}}[author={Linn Abraham}]
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+
+\section{Introduction}
+In the first part of this series we got a brief overview of the different stages in a machine learning project. We started out with setting up the environment, the hardware and software requirements. In this brief article we go a bit more in-depth to see the steps involved in a machine learning workflow. Especially the moving parts involved in a successful training session. This article also mentions the considerations to be had when making choices regarding language, platforms, libraries etc. 
+
+\section{Why Python?}
+
+A programming language is fundamentally a tool which helps us convey an idea to the machine. Thus it should be immaterial which language is used for any particular task. However there are some practical considerations that makes us prefer one language over others. What are some advantages and disadvantages that Python has when it comes to machine learning?
+
+\subsection{Software libraries}
+
+Coding a deep neural network from scratch in Python is possible but is heavily advised against. When one makes heavy use of software libraries one saves time by not reinventing the wheel. The disadvantage to this approach is that the code is no longer in one’s control and subject to change. This change is inevitable in the domain of technology. In science where reproducibility is critical it might not be desirable to have your code break.  Thus the first step to working in Python is often to create an environment (also called a virtual environment) that is isolated from the system Python and to version control the code.  All external libraries are installed within this virtual environment. Version control of code is often done by `Git' together with a `requirements.txt' file that list the version of each external software library used in your code (also called a dependency). The virtual environment is  also useful to manage dependencies when working on different projects that might require different version of each of the dependencies.
+
+\subsection{Wrapper code}
+
+An overlooked advantage of Python is its readability. Python code is often said to be almost like pseudo code and hence very readable. The downside of this is that its slower than other languages such as C, Fortran etc. However this is not very bad since there exists a lot of Python wrapper code that just provides an interface to code written in a faster language that does the actual heavy lifting. We use the python code to pass inputs and to receive the outputs. This is very often encountered in machine learning where a lot of the actual heavy lifting is done by faster languages like C and C++. 
+
+The basics of a programming language can be learnt in a considerably small amount of time. The rest of the time is spent understanding the code written by others and troubleshooting the usage. Time is mostly spend in discussion forums like stackoverflow to understand the error messages spit out by the code you are trying to fix and seeing other people’s solutions. Thus learning python involves learning to use a lot of different tools be it code editing software, virtual environments and version control software and so on and so forth.
+
+\subsection{Some useful libraries}
+
+Depending on the kind of data that one wants to deal with there are many python libraries that one cannot avoid using. NumPy which adds support for numerical arrays. Pandas that add support for numerical arrays that can have more than just numerical data but also strings. It also enables the indexing of arrays using strings. Scipy adds support for scientific functions. Matplotlib is a very rich library that supports almost any kind of data visualization that you can think of. PIL allows to read images into python. Astropy adds support for astronomy related functions.
+
+\section{Why machine learning? What problems does it solve?}
+
+Most things that we as humans learn cannot be put into a sequence of instructions to be followed word to word by any person or machine. Think about how you learnt to walk, speak, identify plants birds animals etc, distinguish new faces from familiar faces. ML is a way of harnessing this power of the human brain to solve problems without explicit instructions. And to apply it to niche problems in every walk of life. Mostly to solve just one designed problem with curated data. Remember that it is no magic bullet either. It helps us to predict patterns in data which are difficult for the average human by delegating the effort to computers. It fails when the problem itself has no patterns - think why ML cannot help you to hack the share market. It fails when there are patterns but the data you have is not enough to capture the variance. 
+
+\subsection{Machine learning vs Deep learning}
+
+Deep learning refers to a special class of machine learning techniques. Although there is no strict boundary here there are some clues that help us distinguish between these. Most deep learning techniques make use of neural networks. Often there are layers of these networks stacked on top of each other that makes them “deep". One advantage that comes with using neural  networks versus traditional learning algorithms is that they are quite versatile and do not require data to be transformed to the specific requirements of the underlying algorithm. However this is often where the algorithms lose its interpretability. Hence the coinage that neural networks are black boxes.
+
+\subsection{CUDA and The GPU revolution}
+
+When PCs transformed from being mostly text based to being heavily dependent on graphics, people developed CPUs  that are specialized for matrix manipulations. Remember that a screen is simply a matrix of pixel values. The real breakthrough in deep learning occurred when researchers found a use for these in training neural networks. Nvidia was the gpu making company that opened up the use of its GPU for anyone interested in doing such things by introducing a platform called CUDA. The python deep learning libraries that we are going to get introduced to make use of the CUDA platform in order to run code on the GPUs.
+
+\subsection{Tensorflow or PyTorch}
+
+There are currently two frameworks which are commonly used to implement deep neural  networks in python. Tensorflow or Tensorflow / Keras which was initially developed by Google, and PyTorch which was initially developed by Facebook. It is mostly a matter of personal taste regarding which one to use. The scikit-learn library has a lot of the non deep learning algorithms as well as a lot of utility functions that can be used during the training of deep neural networks.
+
+\subsection{Vision or Speech}
+
+Two major areas of application in deep learning is computer vision and natural language processing. This can probably be attributed to the fact that vision and language are two traits that are the hallmarks of our intelligence. This also translates to two different formats of digital data. Images and text data. Computer vision techniques are developed to make use of data that has a fixed grid shape like images. NLP techniques are developed to deal with data of variable input size. A sentence has no restriction in the number of words it should have. Depending on the kind of data and problem at hand, we need to look into models developed in either of these application fields. For example, since images are a big part of astronomical surveys, models used in Computer Vision applications like Convolutional Neural Networks or CNNs are often helpful for solving problems. However if the data at hand is a time series signal you may have to look into techniques like transformers that are developed by people interest in Natural Language Processing applications.
+
+\section{Under-the-hood of a deep learning network}
+
+Stochastic Gradient Descent or SGD is the engine of modern deep learning techniques. To get an idea of how it works let us consider a supervised image classification problem. This means that the input is an image and the output is a class label. Since strings or text data is not natural in such cases we encode the class by attaching n neurons at the end of the network. Where n corresponds to the number of classes in the problem. All the outputs are restricted to be between some fixed range like (0,1) using non linear functions like sigmoid. Then the last layer neuron with the highest output value can be the predicted class label.
+
+Most practical datasets are too big to be completely held in a computers memory. This is why we need generators that load the data into memory in batches. 
+All the weights, i.e. parameter values in the network are randomly initialized. A single batch of data is forward passed through the network. A loss function is used to get a feedback regarding how much the predictions differ from the expected output. The errors are backpropagated to the initial layers using gradients. The weights are adjusted and the loop continues. 
+
+Soon the need arrives to have controlled sets for testing the performance of a trained model. Ideally we should not make decisions in model parameters etc. based on this test model. What happens then is the information from the test set leaks back into our model and our test set is no longer unbiased or fair. This is why we often have a train/validation/test split. Where the validation set which is like a test set is used for improving the model parameters.
+
+This constitutes the basic workflow of an deep learning training session. But there are lot more things to be done. How do we properly assess the learning process during the training session itself? Once the training is done how can we assess it? What if the datasets are imbalanced? Does traditional metrics like accuracy work in evaluating the performance? If your dataset is small, is there statistical significance for your results? And finally even if its producing good results, how can you be sure that the model is looking for patterns that you see or finding some other hidden bias? All these can be the content of a future article in this series- watch out. 
+\vspace{0.5cm}
+
+\noindent\fbox{%
+	\parbox{\textwidth}{%
+		\textbf{About the Author}\vspace{0.2cm} \\
+		\textbf{Linn Abraham} is a researcher in Physics, specializing in A.I. applications to astronomy. 
+He is currently involved in the development of CNN based Computer Vision tools for
+prediction of solar flares from images of the Sun, morphological classifications of galaxies from optical images surveys and radio galaxy source extraction from radio observations.
+	}
+}
+    %</note>
+    \printbibliography
+\end{document}

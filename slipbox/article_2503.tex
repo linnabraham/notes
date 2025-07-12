@@ -1,0 +1,86 @@
+\documentclass{../template/texnote}
+
+\title{\textbf{Principal Component Analysis}}[author={Linn Abraham}]
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+\section{Introduction}
+%Principal Component Analysis or PCA is an unsupervised learning method, i.e., it doesn't require your data points to have labels.
+Principal Component Analysis is a useful tool in machine learning for doing feature extraction, dimensionality reduction and data visualization.
+%It is also considered as a dimensionality reduction technique.
+The key idea here is to identify a lower number of features or dimensions from your actual data.
+%This is the reason why it is also called as a dimensionality reduction technique.
+Apart from just bringing down the size of the data that the machine learning technique needs to deal with, this also helps make your results better by removing possible noise in your data.
+Remember that the PCA is a linear technique since the PCA axes are basically some rotated version of your original axes.
+The idea of the principal component is to find a direction in your original feature space where the variation in the data is the maximum.
+Once this is done, the second principal component is the direction which is orthogonal to the first and the one which accounts for the maximum variation in the rest of the data.
+This is repeated untill all of the data variation is accounted for.
+Let us try to understand this technique by going through the math.
+\section{Covariance}
+Variance of a set of numbers is a measure of how spread out the numbers are.
+It is computed as the sum of squared distances between each value and the mean or expected value.
+
+\[
+\text{var}(\{x_i\}) = \mathbb{E}((\{x_i\} - \mu)^2)
+\]
+If we have a set of random variables, then for each variable we end up with a set of numbers corresponding to how many the variable was measured.
+Then computing the variance of each random variable is pretty straight forward using this definition.
+However when it comes to covariance, we exetend this idea to two random variables simultaneously.
+Here we define a covariance for two random variables using a similar distance measure but instead of single squared term we have a cross term containing the two variables.
+The covariance of two variables, so defined, measures how dependent the two variables are (in the statistical sense).
+
+When we have a data matrix of order $n \times m$ corresponding to n samples each with m features, by taking different combinations of two variables we end up with a square symmetric matrix of order $m \times m$ which is called the covariance matrix.
+The variances then appear as the diagonal terms of this covariance matrix.
+
+\[
+\text{cov}(\{x_i\}, \{y_i\}) = \mathbb{E}(\{x_i\} - \mu) \mathbb{E}(\{y_i\} - \nu)
+\]
+where $\mu$ is the mean of set $\{x_i\}$ and $\nu$ is the mean of set $\{y_i\}$ and E is the expectation operator.
+
+\section{Eigenvectors}
+Let us referesh our memory of what eigenvectors and eigenvalues are. For a square symmetric matrix A, if there exists a vector V which when operated on by the matrix results in a scaled version of the vector, then such a vector is called an eigenvector and the value by which it is scaled is known as the eigenvalue.
+\section{Principal Components}
+%The idea of principal components is to find a reduced set of k basis vectors or axes or features from the n original basis vectors in your data.
+The objective of doing PCA is to find a new set of basis vectors for representing the data such that in this new space, the covariance matrix corresponding to the transformed data matrix becomes a diagonal matrix.
+Now, the spectral theorem states that any square symmetric matrix can be written in terms of its eigen vectors and eigen values as follows
+\[ 
+	A = Q \Lambda Q^{T}
+\]
+From the spectral theorem we have the following result for a square symmetric matrix,
+\begin{align}
+	E^{T}A\ E = D
+	\label{eigen}
+\end{align}
+where D is a diagonal matrix made out of the eigenvalues and E is an orthogonal matrix whose columns contain the normalized eigenvectors of A.
+Now for any transformation matrix P which acts on the original data matrix X, we have the following result.
+\begin{align}
+ \text{cov}(P^{T}X) = P^{T} \text{cov}(X) P 
+ \label{transformation}
+\end{align}
+Since we require P to be such that \( \text{cov}(P^{T}X) \) be a diagonal matrix, it is clear by comparing the two previous equations %with the equation \ref{eigen}
+that P should be the matrix made out of the eigenvectors of the covariance matrix of X.
+Since the left hand term in equation \ref{eigen}  and the right hand term in equation \ref{transformation} both represents a change of basis operation, the interpretation of doing \(P^{T}X\) is that we are going from the original space to another space which is defined by the eigenvectors of the covariance matrix (in the original space).
+
+Since the eigenvalues corresponding to the eigenvectors are the diagonal elements of your new covariance matrix, they also represent the data variances along the eigenvector directions. The eigenvector corresponding to the largest eigenvalue becomes your first principal component and so on until you get to the eigenvector with the least eigenvalue which becomes your last principal component.
+Here if you see that a combination of k eigenvectors is enough to pretty much explain the bulk of the variance in your data set, you can choose to drop the rest.
+The original data can be reconstructed by taking the resultant projections of the k components on the original axes.
+\section{The PCA algorithm}
+So now it is time to summarize the PCA algorithm which is quite simple to implement using Numpy.
+	\begin{itemize}
+		\item Write N datapoints $x_{i} = (x_{1i}, x_{2i}, . . . , x_{Mi})$ as row vectors
+		\item Put these vectors into a matrix X (which will have size N × M )
+		\item Centre the data by subtracting off the mean of each column, putting it into matrix B
+		\item Compute the covariance matrix $C = \frac{1}{N} B^{T} B$
+		\item Compute the eigenvalues and eigenvectors of C, so $V^{-1}CV = D$, where V holds the eigenvectors of C and D is the M x M diagonal eigenvalue matrix
+		\item Sort the columns of D into order of decreasing eigenvalues, and apply the same order to the columns of V
+		\item Reject those with eigenvalue less than some $\eta$, leaving K dimensions in the data
+
+	\end{itemize}
+
+%\nocite{chatfieldIntroductionMultivariateAnalysis1980}
+%\nocite{marslandMachineLearningAlgorithmic2014}
+%\nocite{halmosFinitedimensionalVectorSpaces1974}
+    %</note>
+    \printbibliography
+\end{document}
