@@ -1,0 +1,131 @@
+
+\documentclass[oneside]{book} 
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{slashed}
+\usepackage{subcaption}
+
+
+\usepackage{hyperref} 
+\usepackage[capitalize,nameinlink,noabbrev]{cleveref}
+
+
+\usepackage{slashed}
+\usepackage{xargs}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+
+
+
+
+\usepackage[style=alphabetic]{biblatex}
+\addbibresource{../../bibliography.bib}
+
+
+\hypersetup{
+    colorlinks = true,
+    citecolor = cyan
+}
+
+\usepackage{graphicx}
+\graphicspath{{../../resources/}}
+%Theorem environment definitions
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\newtheorem{example}[definition]{Example}
+\newtheorem{prop}[definition]{Proposition}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{thm}[definition]{Theorem}
+\newtheorem{cor}[definition]{Corollary}
+\newtheorem{rmk}[definition]{Remark}
+\newtheorem{conj}[definition]{Conjecture}
+
+%Change the excref and exhyperref commands back to normal
+\newcommand{\excref}[2][note]{\cref{#1}}
+\newcommand{\exhyperref}[3][note]{\hyperref[#1]{#3}}
+\newcommand{\transclude}[2][note]{\ExecuteMetaData[../../notes/slipbox/#2.tex]{#1}}
+
+\newcommandx{\info}[2][1=]{\todo[linecolor=violet,backgroundcolor=violet!25,bordercolor=violet,#1]{#2}}
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommandx{\improve}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+% have title and author's full name appear in in-text citation
+\newrobustcmd*{\citefirstlastauthor}{\AtNextCite{\DeclareNameAlias{labelname}{given-family}}\citeauthor}
+\newcommand{\citetitlebyauthor}[2][]{
+    \citetitle{#2} by \citefirstlastauthor[#1]{#2}
+}
+\usepackage{catchfilebetweentags}
+
+%Fix newlines with catchfilebetweentags
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\CatchFBT@Fin@l}{\endlinechar\m@ne}{}
+{}{\typeout{Unsuccessful patch!}}
+\makeatother
+
+\title{Airis Magazine}
+
+
+
+\begin{document}
+    \maketitle
+
+
+    %Import all of a note
+    %\chapter{A sneak peak into the science behind telescopes}
+    %\transclude{article_2301}
+%\chapter{AI over coffee}
+	%\transclude{article_2302}
+%\chapter{Why the Sky is not the Limit for Astronomy Research?}
+	%\transclude{article_2303}
+%\chapter{The Little Green Men in Space}
+	%\transclude{article_2304}
+\chapter{Exploring the Explosive Side of the Sun}
+	\transclude{article_2305}
+\chapter{The Galaxy Revelation and a Growing Universe}
+	\transclude{article_2306}
+\chapter{Understanding the Support Vector Machine Algorithm}
+	\transclude{article_2308}
+\chapter{Guide to Practical Machine Learning for Astronomy - Part I}
+	\transclude{article_2309}
+\chapter{AI Models as Black Boxes: Not for Long}
+	\transclude{article_2311}
+\chapter{Probabilities in Machine Learning}
+	\transclude{article_2401}
+\chapter{Introduction to Solar Astronomy}
+	\transclude{article_2403}
+\chapter{Does the Universe Speak the Language of Radio Waves?}
+	\transclude{article_2404}
+\chapter{Beginners Guide to Machine Learning in Python - Part 2}
+	\transclude{article_2405}
+\chapter{Transforming the landscape of ML using Transformers}
+	\transclude{article_2406}
+\chapter{How do we know the Sun's temperature?}
+	\transclude{article_2408}
+\chapter{What the stars taught us?}
+	\transclude{article_2410}
+\chapter{Learning is better than Programming}
+	\transclude{article_2411}
+\chapter{How to Improve your ML models}
+	\transclude{article_2412}
+\chapter{What are Galaxies?}
+	\transclude{article_2501}
+\chapter{Principal Component Analysis}
+	\transclude{article_2503}
+\chapter{Understanding the XGBoost Algorithm}
+	\transclude{article_2504}
+\chapter{The Hunt for the Cosmic Radio Lines of Neutral Hydrogen}
+	\transclude{article_2505}
+
+	 
+
+    \printbibliography
+\listoftodos
+
+\end{document}
