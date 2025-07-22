@@ -1,0 +1,70 @@
+\documentclass{../template/texnote}
+
+\title{Notes On ML For Solar Flares}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+	\subsection{Discussion}
+
+	\subsection{Problem statement}
+	\begin{itemize}
+		\item 24 hr or 48h predictability - taken for standardization 
+		\item Operational and segmented
+		\item A non binary classification approach be feasible with given data. 
+	\end{itemize}
+	
+	\subsection{Data}
+	\begin{itemize}
+		\item full-disk photospheric vector magnetic field from space
+		\item 4 years worth of data.
+		\item “that occur within ± 68◦ of the central meridian”
+		\item Class imbalance; small no of flares
+		\item K-fold cross validation strategies to make maximum use of available data. 
+		\item We are limited by observations of actual flares
+		\item Does oversampling the minority class work? 
+		\item Labelled data a constraint? Data augmentation techniques for neural networks.
+		\item Understanding more about nature of data, features and pre-processing
+		\item Aditya L1 
+
+	\end{itemize}
+	\subsection{Features}
+	\begin{itemize}
+		\item Multivariate vs Univariate analysis
+		\item New features that have come up in literature ever since the paper.
+		\item They do pre and post feature selection with f-score analysis and skill score analysis
+		\item Better feature selection strategies or dimensionality reduction strategies like PCA 
+	\end{itemize}
+
+	\subsection{Network}
+	\begin{itemize}
+		\item Justification for using a RBF kernel
+		\item Neural networks are  seen to be less efficient on extracted feature data as per cited studies.
+		\item Possibility of using neural networks on original image data. 
+
+	\end{itemize}
+	\subsection{Evaluation metrics / Loss functions.}
+	\begin{itemize}
+		\item Class imbalance leads to issues of a good metric.
+	\item How good of a metric is TSS
+	\begin{itemize}
+		\item TSS is agnostic to the consequences of the two predictions. Can we weigh the metric to correct for this? 
+	\end{itemize}
+	\end{itemize}
+
+	\subsection{Other}
+	\begin{itemize}
+		\item Code availability?
+		\item Maintaining the same imbalance ratio for better comparisons.
+
+	\end{itemize}
+
+
+	\subsection{Quotes}
+
+The small number of flares in our catalog also means that there is an additional risk for our results not to generalize well.
+
+It is not clear what the impact of including or rejecting C-class flares from the catalog is on the performance of the forecasting algorithm. Bloomfield et al. (2012) highlight in their Table 4 that including C-class flares may improve some performance metrics while lowering others: in their case, not including C-class flares increase the true skill statistic (TSS) metric but decrease the Heidke Skill Score
+    %</note>
+    \printbibliography
+\end{document}
