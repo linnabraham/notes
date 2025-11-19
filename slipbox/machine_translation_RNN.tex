@@ -1,0 +1,70 @@
+\documentclass{../template/texnote}
+
+\title{Using RNNs for language translation}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+    % Consider the state of machine translation using RNNs.
+    % First we learn a representation of the source sequence in a lower dimensional space (also known as an embedding).
+    % Then combine this with a language model.
+    % What is a language model?
+    % Given a sequence of tokens, a language model generates a probability distribution over all possible tokens that can come next.\improve{Mention something about start and end tokens}
+    % By feeding the output back again as input into the language model, it can keep generating tokens.
+    % Thus during training, the source sequence embedding, along with tokens already predicted are passed to the decoder to generate the output sequence.
+    % The ground truth sequence is then used to compute the error and fix the weight matrices of the RNN.\unsure{Both encoder and decoder RNN?}
+    % \unsure[inline]{How does this training actually happen? Does it predict all tokens in the sequence and then compute error or after predicting a single token, does it look at the actual ground truth token?}
+    We saw that \exhyperref{Rnn}{RNN}s solved certain issues with feed-forward networks, especially, the ability to preserve the temporal information and order present in the data.
+    They achieved this by having an API that is strictly sequential in nature.
+    But now what about sequences where, unlike a time-series, the network benefits by seeing and learning relations between all input tokens together?
+    For example, consider natural languages such as English, Spanish etc. where a strict causal connection doesn't exist between each token.
+    Would RNNs be able to learn such connections?
+    It turns out that it can, but because of their sequential API, you still have to show it one sequence at a time.
+    This can cause the training to be quite slow.
+    Another problem that plagues the RNN architecture is the vanishing gradients issue that causes them to progressively forget about the past as the sequences they deal with become longer.
+
+    These issues manifest well in the task of machine-translation where RNNs were used for a long time.
+    % Feed-forward networks had no issue learning connections between different tokens together.
+    % However, they had no way to incorporate the ordering of words etc. which an RNN has. \improve{Add this to the note on RNNs}
+    % % for this purpose or would it be sub-optimal?
+    % But RNNs can be used to do anything which a feed forward network can do.\improve{Karpathy talks about how RNNs are turing complete - that is they can learn any arbitrary program like how neural networks can learn any arbitrary function - but he also says to not give a lot of importance to this fact}
+    % So you could think of using an RNN as an encoder and showing it the whole sequence sequentially and turning it into a vector in a lower dimensional space which encodes
+    % % To understand this, lets focus on the task of machine-translation.
+    % It can be easily seen that a direct application of RNNs to the problem of language translation is not feasible.
+    % Consider translating the sentence, ``I will bring the bag to you.'' from English to Spanish.
+    % In the Spanish version, ``Te traeré la bolsa,''  - ``Te,'' the first word corresponds to ``you'' in the English version.
+    % Although it is possible to build machine-translation networks using RNNs, they suffer from a few limitations that hamper their performance.
+
+    \begin{itemize}
+        \item 
+    The encoder RNN has to fit the information regarding the entire input sequence into a single embedding vector (which could either be the last output vector or the internal state vector) which limits the length and complexity of input sequences that can be translated.
+\item
+    Other than the limitation arising from the length of the embedding vector, RNNs by design have problems with long sequences\improve{Talk about the vanishing gradient issue}. They tend to progressively forget about the past.
+    This can affect the encoder RNN when it comes to creating the embedding vector and the decoder RNN which receives the embedding vector along with the sequence of previously predicted tokens in order to generate the next token.
+    \end{itemize}
+
+    % But sometimes its desirable to have connections between input tokens disregarding the order.
+    % For example, we know that when translating text from one language to another, often the translated text has different ordering than your original text.
+    % Thus in such cases, having connections between tokens at different positions in the sequence is essential.
+    In the idea of \exhyperref{Attention}{attention}, this ability to have connections between different tokens is put back into such networks.
+    \unsure{But by throwing away the RNNs and working from scratch?}
+    % The concept of attention was developed mostly for \exhyperref{MachineTranslationRnn}{machine translation} tasks.
+    % Thus we can see how an RNN and an attention based network would do things differently in such a task and how the attention based network is better.
+
+
+
+    How can we use an RNN for a language translation task?
+    We can think about feeding in an input sequence into an RNN and keeping the output of the RNN at each time step as the generated output.
+    This is doomed to be a failure because of the sequential nature of the RNNs.
+     
+    How do we expect the network to correctly predict ``You'' when it is just given the input ``I''?
+    This is why even when using RNNs, things are done differently and we resort to first having a proper representation of the whole input sequence.
+    We can use an RNN for this purpose and use either the final output or the final value of the internal variables for this representation.
+    This representation can be used to initialize the internal variable instead of zeros in a coupled RNN (decoder).
+    We then generate the output sequence using the starting token and feed back the output again into the input.
+    % How is this useful in, say, a language translation task?
+    % We could say that by computing attention for a word, the model is learning how the word is related to the context in which its used.
+    % Why is this better?
+    %</note>
+    \printbibliography
+\end{document}

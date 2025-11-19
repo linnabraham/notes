@@ -1,0 +1,137 @@
+\documentclass{../template/texnote}
+
+\title{Attention}
+\author{Linn Abraham}
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+% Chollet uses an example of a person reading a book to explain attention.
+% If you read a book on deep learning, with the ultimate goal of using it for a project, you will pay special attention to certain parts of the book.
+    % The concept of attention used in deep learning is quite self-explanatory. When you have a conversation with someone, you pay more attention to certain words and less attention to certain other words. In natural language processing tasks, the inputs are often individual sentences and each sentence is split into a number of different tokens. Thus when we talk about self-attention, we are talking about the weight each token in the sentence should give to other tokens in the same sentence.
+
+    % Why not just feed-forward networks (MLPs, CNNs) or RNNs?
+    % What is so desirable about the attention mechanism?
+    % But the way it is currently designed, these are patterns that are globally important, that is, across all data samples\unsure{In some weighted fashion or equally?}.
+    % The usual way is to think of them as edges, textures etc.
+    % In a regular feed-forward network one could imagine a neuron that always looks at, say, pixels 10-50 and 100-150.
+    % No matter what the input image looks like, the behaviour of this neuron doesn't change.
+
+    % Lets start by looking at what is attention.
+    % \section{From Images to Text}
+    % Images have a natural numerical representation.
+    % An RGB image of size 256 x 256 is made up of 256 x 256 tokens (pixels) each of which is a point in a three dimensional feature space (the color space).
+    % Thus there are 256 x 256 spatial dimensions and 3 color (channel) dimensions.
+    % For each token, the channel dimensions contain the intensity of light in particular passband and as such it represents something physical.
+    % For a better representation, one can resort to embeddings learnt by other networks on related tasks.\unsure{And fine tune them during actual training?}
+
+    % In contrast, for text we have to make a decision on the best possible representation for a particular task.
+    % One possible representation is one-hot encoding.
+    % In such a case, the tokens in a text sample, which could be words, are points in a dimension of size equal to the vocabulary and words with similar meaning lie in orthogonal directions.
+    % Hence this is not a physical scenario.
+    
+
+    % In most tasks using words, the meaning of words are definitely important, hence we can start with an existing embedding (learnt by a different network for a different task) trained on a large corpus of text.
+    % This embedding can be improved or fine-tuned for the specific task.
+    % % \improve{Another difference is that images from a source usually have a single input shape.}
+    % % The tokens in an image are the individual pixels - what about text?
+    % % Maybe words can be used as the tokens.
+    % \section{RNNs vs. Attention}
+    % \section{Historical motivation for Attention}
+    \section{History of Attention}
+    Recurrent neural networks or \exhyperref{Rnn}{RNNs} were invented primarily to impart the ability for neural networks to learn the ordering of different tokens in an input.
+    This was important for a lot of problems involving time series inputs.
+    Additionally their sequential API also enabled them to easily handle inputs of varying lengths.\unsure{Is this true? Padding is still employed.}
+    Such architectural priors gave them an edge in natural language applications as well because of the similarity of time series and natural language data.
+    However, they also \exhyperref{MachineTranslationRnn}{struggled} when it came to certain tasks in NLP such as machine translation.
+    The sequential nature of their input processing was a big handicap when it came to speed and efficiency of training and so was their inability to work with long sequences.
+
+    The attention mechanism was developed primarily in the context of natural language processing and machine translation to improve upon the performance of RNNs.
+    Attention did this by enabling neural networks to have a richer representational space (\exhyperref{Embedding}{embedding} space) for input (or token) vectors (see also, \exhyperref{LatentSpace}{Latent Space}).\improve{As a side effect they gained parallelization and speed benefits}
+    Before attention, the embedding vectors used in RNNs (Word2Vec, GLoVe etc.) were mostly context unaware representations of words.
+    In such a learned space, words with similar meanings would cluster together but each word had a unique vector representation irrespective of the context it appeared in.
+    \improve{Talk about how attention rectifies this? or maybe after discussing its implementation?}
+    % That is, the presence or absence of other words in the same sentence would never affect these embeddings.
+    How RNNs still managed to be context aware to some extent was due to the sequential training process and using their hidden state.
+
+
+    \section{MLPs versus Attention}
+    In an MLP, the connection between an input token (node) and the output is through the weights and biases.
+    Consider an MLP with three input nodes in the first layer and a hidden layer with any number of nodes.
+    The value of a particular hidden layer node is a weighted average of the three inputs\improve{dont forget the bias and softmax} that is decided by the individual connection strengths of the node with each of these inputs.
+    Now, if one were to swap the first and last node and keep the middle node unchanged, the value of the hidden layer node would definitely change.
+    But if you think about the middle neuron, its value and connection strength has not changed and hence its effect on the output neuron also hasn't changed.
+    Even the connection strengths for the other neurons haven't changed.
+    What has changed is only the values of the two neurons.
+    Now, what if we allowed the connection strengths to be decided dynamically from the input nodes, the change in the input would cause a different kind of change in the output.
+    \unsure{But the way the connection strengths are decided would still be a set of static parameters learnt from the data.}
+    This is what attention tries to do.
+
+    \section{CNNs versus Attention}
+    % The attention mechanism can also be seen as an improved version of feed-forward networks such as CNNs.
+    A neural network that uses MLPs without convolutional layers, treats every pixel in an image the same way.
+    That is, there is no prior built into their design that some pixels can be correlated with others (these might form edges, textures etc.).\info{Although they could still learnt it the hard way.}
+    This is baked into the design of CNNs through the use of convolutional kernels.
+    Additionally since different parts of the image share the same kernel weights, these patterns are assumed to be translationally invariant.
+    In contrast, the attention mechanism doesn't have this locality prior built in (similar to regular MLPs in this regard) since it allows for all tokens to affect all other tokens.
+    But as a result the network can learn more distant patterns in an input image.\improve{Include note on disadvantages of the attention architecture}
+
+    % CNNs (or any feed-forward architecture) were designed primarily for learning global patterns in the data.
+    % The convolution kernels or filters of a CNN tries to learn useful %relevant, interesting
+    % intermediate representations (also known as feature maps) that transform the raw input space into a more structured latent space\unsure{Does structure mean that classes separate more easily?}.
+    % These are similar to the word or token embeddings in a natural language task.
+    % However, the feature maps learnt by the network have a global nature.
+    % The weights or the convolution kernels are learnt from all of the input samples (by giving an equal weightage to all samples)
+
+
+    % But what these useful representations are depends on the specific task and is learnt from all the input samples in the data.
+    % Once trained, between different inputs the feature maps are different but the way the feature maps are generated remain the same for all inputs (static or uniform).
+    % An edge-detector filter always treats the inputs pixels in the same way (like a well-behaved edge detector should).
+    % Now what if you wanted these filters to treat inputs differently depending on their content?
+    % That is, what if you want to learn local patterns in the data (patterns within a single image) without those being washed out by the global patterns?
+    \section{Motivation for Attention from NLP}
+    The primary motivation for attention comes from natural language applications.
+    Consider the following sentences - 
+         ``I swam across the river to get to the other bank'' and 
+         ``I walked across the road to get cash from the bank''.
+    The embedding vector used to represent the word ``bank'' should be most affected by other words (tokens) in the same input.
+    In the first case, we would want it to be affected more by the tokens\unsure{or embeddings?} - ``swam'' and ``river'' and less by other tokens.
+    For the other case, we want the embedding to be affected more by ``cash'' and less by other tokens.
+    In other words, the same token should have different embedding vectors when seen in different contexts.
+    As we already saw, such a mechanism was missing from the earlier architectures.
+    % The weights in the hidden layers of neural networks would treat the same token (a pixel at a particular location with a particular RGB value)
+    % in the same way regardless of what other tokens (pixels) exist in the same input.
+    \section{Parallelism in Attention}
+    Parallelism is one of the most important advantages of the attention mechanism over existing techniques such as RNNs (LSTMs, GRUs etc.).
+    How is this achieved in attention?
+    The answer is simple --- given a sentence or a sequence of tokens, the attention process works with a single pair of tokens at a time, using the weight matrices (Q,K \& V).
+    Thus the computations are independent \unsure{How can one be sure?}.
+    \section{Implementing Attention}
+    Now how do we implement such a mechanism?
+    One can require that the embedding of each token to be a linear combination of all the different tokens in an input.
+    In such a case, the coefficients that multiply the individual vectors can be our attention coefficients.
+    Now the task left is to decide how to get these coefficients or weights.
+    Which is equivalent to asking how do we decide the value of attention a particular token should pay to another token.
+    A simple answer could be to compute the similarity between the two tokens (using something like the dot product) and use that as the attention value.
+
+    Now if this was the case, there would be nothing more to be learnt.
+    Each of the feature values in each token would have an equal role in computing the attention values and our network wouldn't be much useful.
+    So we want to generalize these concepts and make them parameters that can be learnt from the data.
+    In order to do that we project the embedding vectors into three spaces and learn the parameters for these projections - these are the matrices associated with the Query, Key and Value.
+    In such a setting, we view the attention scores as coming from the dot product of the two vectors Q and K which stands for query and key.
+    And the information of how to combine the original embeddings using the attentions scores to come from the V vector which stands for value.
+    \nocite{bishopDeepLearningFoundations2024,cholletDeepLearningPython2025,goodfellowDeepLearning2016}
+    \improve{Cite 3b1b}
+    % Using some parallels from information theory we 
+    % Now for different images, the feature maps, which are the intermediate representations, are different because of the difference in the images themselves, the kernels remain fixed.
+    % Once trained over the whole data, the way the feature maps and embedding vectors are generated doesn't change with input.
+    % Now, what if you wanted the network to learn things differently from different images.
+    % Or more specifically, what if you wanted the neuron in a hidden layer to 
+
+    % However, the kernels learnt are influenced by all of the data samples.
+    % Once trained, the kernels do not change and hence we could say that the patterns which the network is looking for are global in nature.
+    % Now, what if you wanted the way the feature maps are computed to change depending on the image itself?
+
+
+    %</note>
+    \printbibliography
+\end{document}

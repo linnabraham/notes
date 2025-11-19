@@ -1,0 +1,20 @@
+\documentclass{../template/texnote}
+
+\title{Embedding}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+The use of the word comes from the domain of natural language processing.
+Unlike images that have a natural numerical representation, words have to be given a numerical representation for machines to be able to work with them.
+A word or token is initially represented as a one-hot encoded vector with dimension equal to the vocabulary size.
+But this is wasteful and in fact these vectors can be mapped to a much smaller dimensional space by a trained network.
+The vectors in this embedding space has the property that words with similar meaning cluster together.
+Thus in language model, a word-embedding is a more natural way of representing input words or tokens rather than one-hot encoding it.
+
+But this concept has now been generalized to other domains so that when a CNN or another model uses a hidden layer which is often lower dimensional, we can say that the hidden layer learns an embedding for the high dimensional image.
+
+\nocite{goodfellowDeepLearning2016}
+    %</note>
+    \printbibliography
+\end{document}

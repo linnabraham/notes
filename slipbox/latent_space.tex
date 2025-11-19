@@ -1,0 +1,25 @@
+\documentclass{../template/texnote}
+
+\title{Latent Space}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+    There can be a confusion between latent manifolds, as in the manifold hypothesis \parencite[][Chapter 5.1.2]{cholletDeepLearningPython2025} and latent spaces.
+    Lets understand what is meant by latent manifold first.
+
+    Consider the MNIST problem in which the input to the neural network is an array of integers - 28 x 28 in size with each integer being between 0 and 255.
+    The total number of possible inputs is 256 to the power of 784.
+    According to the manifold hypothesis, all natural data, are not spread randomly or uniformly in this space\improve{Keep in mind that the raw input space is an integer grid initially but often replaced by a continuous space by normalizing the values to floats between 0 and 1}\unsure{But even floats when represented digitally are discrete right?}
+\info{The range and nature of the possible values might affect the scale and shape of this space}
+    but fall on a subspace that can be called the latent manifold.
+    What this means with reference to the MNIST example is that, any random point in the space we mentioned before would not correspond to a realistic handwritten digit.
+    The goal of a deep learning model would be to learn the structure of this low-dimensional space using far less parameters\unsure{Is this true or are there cases where models might have far more parameters than in the original space?}.
+    
+    The neurons in the hidden layers of a neural network or feature maps in a CNN are intermediate representations of the data.
+    This intermediate space which might have a different dimensionality and structure could be called the latent space.
+    \unsure{Does the manifold hypothesis still hold in this space?}
+    In the case of a classification task, we can imagine this space to be more beneficial to the network, say because data points corresponding to different classes could be well separated here.
+    %</note>
+    \printbibliography
+\end{document}

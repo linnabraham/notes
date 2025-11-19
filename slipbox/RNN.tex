@@ -1,0 +1,38 @@
+\documentclass{../template/texnote}
+
+\title{Recurrent Neural Networks}
+
+\begin{document}
+    \maketitle \currentdoc{note}
+    %<*note>
+    The archetypal neural network one is familiar with is also known as a feed-forward network.
+    However, such networks suffer from various issues, the least of which is having to adhere to a fixed input (or output) size.
+    \improve{To use them with sequences for input or output, we need to do all sorts of acrobatics.}
+    Another issue is that the number of computational steps involved in the learning process are also fixed.
+    \unsure{How is this solved? Aren't the number of steps in an RNN also fixed?}
+
+    Another major shortcoming of such networks is there isn't a way to inform the network of order and causality.
+    That is, networks made of feed-forward layers do not distinguish between a regular sequence and a time-series.
+    For time-series data and tasks involving them, say forecasting, a data point in the future shouldn't affect the value predicted for a data point in the past.
+    Similarly, when it comes to natural language, the ordering of tokens is important to our understanding.
+    \unsure{But when it comes to tasks such as translation a strict ordering doesn't always work.}
+
+    A recurrent neural network is an alternative that is more natural for handling sequential inputs.
+    They can be thought of as a loop with an internal variable.
+    This variable is initialized to zero or some random number.
+    The first input is combined with this internal variable to produce the first output.
+    The internal variable then gets updated based on this input.
+    When the next input comes and gets combined with the updated internal variable, this variable allows the previous input to affect the current output.
+    Thus we see that RNNs have something similar to a memory that gets with each input it sees, because of this internal variable.
+    \unsure{This is why RNNs are also seen as neural networks with memory.}
+    The loop then continues.
+    Note that between independent training samples, the internal state is reset.
+
+    What we have described so far is the forward pass of the network.
+    Once a sequence has been seen by the network in its entirety, we compute the error based on the ground truth sequence and then update the weight matrices that decided how the input  is combined with the internal variable.
+
+    \improve{Write about how to unroll the loop so that it can be thought of as a neural network}
+    \nocite{cholletDeepLearningPython2025,karpathyUnreasonableEffectivenessRecurrent,olahUnderstandingLSTMNetworks}
+    %</note>
+    \printbibliography
+\end{document}
